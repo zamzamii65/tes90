@@ -1357,23 +1357,18 @@ cards.forEach((card, i) => {
     width: 100%;
   }
 
-  /* Wrapper untuk bikin iframe responsif */
-  .iframe-wrapper {
-    position: relative;
+  .iframe-container {
     width: 100%;
-    padding-top: 66.66%; /* Rasio 600:400 = 3:2 */
-    border-radius: 8px;
-    overflow: hidden;
+    max-width: 500px;   /* kecilin game maksimal 500px */
+    margin: 0 auto;
   }
 
-  .iframe-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .iframe-container iframe {
     width: 100%;
-    height: 100%;
+    height: 350px;      /* tinggi game bisa diatur */
     border: none;
     border-radius: 8px;
+    display: block;
   }
 </style>
 
@@ -2099,5 +2094,6 @@ renderSavedEvents();
 </script>
 </body>
 </html>
+
 
 
