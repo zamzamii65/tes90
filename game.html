@@ -60,7 +60,6 @@
       transform: scale(1.1);
     }
 
-    /* GIF Game Over */
     #gameOverGif {
       display: none;
       position: absolute;
@@ -72,7 +71,6 @@
       z-index: 10;
     }
 
-    /* Modal background */
     .modal {
       display: none; 
       position: fixed; 
@@ -120,10 +118,8 @@
 </head>
 <body>
 
-  <!-- GIF Game Over -->
   <img id="gameOverGif" src="over.gif">
 
-  <!-- Pilih Karakter -->
   <div id="startScreen">
     <h1>Pilih Karakter Sapi 🐄✨</h1>
     <div class="char-select">
@@ -134,11 +130,9 @@
     </div>
   </div>
 
-  <!-- Game -->
   <canvas id="gameCanvas" width="600" height="400"></canvas>
   <button id="restartBtn">🔄 Restart</button>
 
-  <!-- Modal Kemenangan -->
   <div id="winModal" class="modal">
     <div class="modal-content">
       <h2>🎉 Selamat! 🎉</h2>
@@ -155,14 +149,29 @@
     const winModal = document.getElementById("winModal");
     const gameOverGif = document.getElementById("gameOverGif");
 
-    const WIDTH = canvas.width;
-    const HEIGHT = canvas.height;
+    let WIDTH = canvas.width;
+    let HEIGHT = canvas.height;
+
+    // === Responsive Canvas Resize ===
+    function resizeCanvas() {
+      let containerWidth = window.innerWidth;
+      let newWidth = Math.min(containerWidth * 0.9, 600);
+      let newHeight = newWidth * (400 / 600);
+
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+
+      WIDTH = newWidth;
+      HEIGHT = newHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    // === End Responsive ===
 
     let sprite = new Image();
     const bg = new Image();
     bg.src = "background.png";
 
-    // AUDIO
     const bgm = new Audio("backsound.mp3");
     const loseSfx = new Audio("lose.mp3");
     const winSfx = new Audio("win.mp3");
@@ -248,7 +257,6 @@
       }
       balloons.forEach(b => b.x -= pipeSpeed);
 
-      // tabrakan sapi dengan pipa
       for (let i = 0; i < pipes.length; i++) {
         if (
           cow.x < pipes[i].x + pipeWidth &&
@@ -260,7 +268,6 @@
         }
       }
 
-      // tabrakan sapi dengan balon
       balloons.forEach(b => {
         if (!b.collected &&
           cow.x < b.x + b.size &&
@@ -340,7 +347,6 @@
         ctx.fillRect(pipes[i].x, pipes[i].y + gap, pipeWidth, HEIGHT);
       }
 
-      // gambar balon
       balloons.forEach(b => {
         if (!b.collected) {
           ctx.font = b.size + "px Arial";
