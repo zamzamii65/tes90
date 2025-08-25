@@ -155,8 +155,8 @@
     const winModal = document.getElementById("winModal");
     const gameOverGif = document.getElementById("gameOverGif");
 
-    let WIDTH = canvas.width;
-    let HEIGHT = canvas.height;
+    const WIDTH = canvas.width;
+    const HEIGHT = canvas.height;
 
     let sprite = new Image();
     const bg = new Image();
@@ -181,20 +181,6 @@
     let targetScore = 10;
     let cowSfxInterval;
     let deathReason = "";
-
-    // === Resize Canvas Supaya Responsive ===
-    function resizeCanvas() {
-      let newWidth = Math.min(window.innerWidth * 0.9, 600);
-      let newHeight = newWidth * (400 / 600);
-
-      canvas.width = newWidth;
-      canvas.height = newHeight;
-
-      WIDTH = newWidth;
-      HEIGHT = newHeight;
-    }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
 
     function resetGame() {
       cow = {
